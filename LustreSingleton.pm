@@ -25,15 +25,15 @@ sub getVersion {
 	}
 	else
 	{
-		my $version_filename = '/proc/fs/lustre/version';
+        my $version_filename = '/sys/fs/lustre/version';
 		if (-e $version_filename) {
 			if($this->{_debug}){ print "retrieving version\n"; }
 			open(FF,"<$version_filename");
 			my $version_line = <FF>;
 			close(FF);
 			chomp($version_line);
-			my @version = split(" ",$version_line);
-			$this->{_version} = $version[1];	
+            my $version = $version_line;
+            $this->{_version} = $version;
 		}
 	}
 	return $this->{_version};
